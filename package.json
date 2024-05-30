@@ -1,0 +1,21 @@
+{
+  "name": "typescript-ioc-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node js/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BartSpangenberg/typescript-ioc-practice.git"
+  },
+  "keywords": [],
+  "author": "Bart Spangenberg <bart@newu-app.com>",
+  "license": "NewU (RabbitQuest BV)",
+  "bugs": {
+    "url": "https://github.com/BartSpangenberg/typescript-ioc-practice/issues"
+  },
+  "homepage": "https://github.com/BartSpangenberg/typescript-ioc-practice#readme"
+}
