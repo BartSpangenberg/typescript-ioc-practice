@@ -32,10 +32,9 @@
     registerSingleton: Registers a type as a Singleton, ensuring only one instance is created.
     registerFactory: Registers a factory method for creating instances of a type.
     resolve: Retrieves an instance of a registered type, injecting dependencies as needed.
-    release / removeSingleton: Manages the disposal and cleanup of resolved instances.
+    dispose / release / removeSingleton: Manages the disposal and cleanup of resolved instances.
 
     Nice to have methods
-    register: Registers a type and its implementation with the container.
     registerInstance: Registers an already created instance with the container.
     buildUp: Injects dependencies into an existing object instance.
     isRegistered: Checks if a type is registered with the container.

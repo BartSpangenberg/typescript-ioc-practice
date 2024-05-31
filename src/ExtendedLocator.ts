@@ -2,6 +2,11 @@ interface IDisposable {
   dispose(): void;
 }
 
+// TODO: get instead of resolve
+// TODO: remove buildUp
+// TODO: dispose instead of release
+// TODO: Change keys to types
+
 class ExtendedLocator {
   private factories: Map<string, () => any>;
   private singletons: Map<string, any>;

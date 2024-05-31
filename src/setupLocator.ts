@@ -7,8 +7,9 @@ import GlobalSettings from "./entities/GlobalSettings";
 export const container = new Locator();
 
 // Register factories
-container.registerFactory<Foo>("foo", () => new Foo("FooInstance"));
+// TODO: Make it type based instead of keys
 container.registerFactory<Bar>("bar", () => new Bar(container.resolve<Foo>("foo")));
+container.registerFactory<Foo>("foo", () => new Foo("FooInstance"));
 
 // Register singletons
 container.registerSingleton<GlobalSettings>("global-settings", () => new GlobalSettings());
