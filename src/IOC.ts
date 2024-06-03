@@ -2,40 +2,31 @@ interface IDisposable {
   dispose(): void;
 }
 
-// TODO: get instead of resolve
-// TODO: remove buildUp
-// TODO: dispose instead of release
 // TODO: Change keys to types
 
-class ExtendedLocator {
-  private factories: Map<string, () => any>;
-  private singletons: Map<string, any>;
-  private instances: Map<string, any>;
-
-  constructor() {
-    this.factories = new Map();
-    this.singletons = new Map();
-    this.instances = new Map();
-  }
+class IOC {
+  private static factories: Map<string, () => any> = new Map();
+  private static singletons: Map<string, any> = new Map();
+  private static instances: Map<string, any> = new Map();
 
   // Register a factory for a specific type
-  registerFactory<T>(key: string, factory: () => T): void {
+  static registerFactory<T>(key: string, factory: () => T): void {
     this.factories.set(key, factory);
   }
 
   // Register a singleton for a specific type
-  registerSingleton<T>(key: string, factory: () => T): void {
+  static registerSingleton<T>(key: string, factory: () => T): void {
     const singleton = factory();
     this.singletons.set(key, singleton);
   }
 
   // Register an already created instance
-  registerInstance<T>(key: string, instance: T): void {
+  static registerInstance<T>(key: string, instance: T): void {
     this.instances.set(key, instance);
   }
 
-  // Resolve an instance using the registered factory, singleton, or instance
-  resolve<T>(key: string): T {
+  // Get an instance using the registered factory, singleton, or instance
+  static get<T>(key: string): T {
     if (this.singletons.has(key)) {
       return this.singletons.get(key);
     }
@@ -50,12 +41,12 @@ class ExtendedLocator {
   }
 
   // Remove a singleton from memory and call its dispose method if available
-  removeSingleton(key: string): void {
-    this.release(key);
+  static disposeSingleton(key: string): void {
+    this.dispose(key);
   }
 
   // General release method to handle disposal of any registered instance
-  release(key: string): void {
+  static dispose(key: string): void {
     if (this.singletons.has(key)) {
       const singleton = this.singletons.get(key);
       if (singleton && typeof (singleton as IDisposable).dispose === "function") {
@@ -73,18 +64,10 @@ class ExtendedLocator {
     }
   }
 
-  // Inject dependencies into an existing object
-  buildUp<T>(instance: T): T {
-    // Logic to inject dependencies into the existing instance
-    // This is a simplified example; actual implementation might vary
-    // based on your dependency injection requirements
-    return instance;
-  }
-
   // Check if a type is registered with the container
-  isRegistered(key: string): boolean {
+  static isRegistered(key: string): boolean {
     return this.factories.has(key) || this.singletons.has(key) || this.instances.has(key);
   }
 }
 
-export default ExtendedLocator;
+export default IOC;
